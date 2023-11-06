@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} OrionScan | Scan {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'assests/static/css/style.css' %}" data-n-g="" />
+{% endblock %}
+
+
+<!-- <script>
+    function submitScanConfiguration() {
+        const data = {
+            selectedScans: "selectedScans",
+            selectedTargets: "selectedTargets",
+            schedule: "schedule",
+            startTime: "startTime",
+            emailSend: "emailSend",
+        };
+
+        fetch('/api/scan-configuration/', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script> -->
+
+{% block content %}
+{% include 'navbar.html' %}
+<!-- <button class="btn-primary bg-primary" onclick="submitScanConfiguration()">Test</button> -->
+
+<div class="flex flex-col w-full h-full grow">
+    {% include 'scan/scan_content.html' %}
+    <footer class="text-xs opacity-50 text-center mt-16 py-4">© OrionScan, LLC. 2019 - 2023. All Rights Reserved | <a
+            href="#">Terms &amp; Policies</a></footer>
+</div>
+{% endblock %}

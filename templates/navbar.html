@@ -1,0 +1,45 @@
+{% load static %}
+
+<header class="bg-white border-bottom">
+    <nav class="container-fluid d-flex justify-content-between align-items-center py-2 px-5">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="OrionScanLogo" width="250">
+        </a>
+
+        <div class="d-none d-lg-block">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'targets' %}">Targets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'scan' %}">Scanners</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'pricing' %}">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+                {% if is_logged_in %}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'logout' %}">{{ request.user.username }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ml-2" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- You can replicate the links for mobile view here -->
+        </div>
+    </nav>
+</header>
