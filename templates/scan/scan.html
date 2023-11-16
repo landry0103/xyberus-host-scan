@@ -7,9 +7,11 @@
 <link rel="stylesheet" href="{% static 'assests/static/css/style.css' %}" data-n-g="" />
 {% endblock %}
 
-
-<!-- <script>
-    function submitScanConfiguration() {
+{% block content %}
+{% include 'navbar.html' %}
+<!-- <button class="btn btn-primary bg-primary" onclick="submitScanTest()">Test</button> -->
+<script>
+    function submitScanTest() {
         const data = {
             selectedScans: "selectedScans",
             selectedTargets: "selectedTargets",
@@ -18,7 +20,7 @@
             emailSend: "emailSend",
         };
 
-        fetch('/api/scan-configuration/', { 
+        fetch('/api/scan-test/', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,12 +35,7 @@
             console.error('Error:', error);
         });
     }
-</script> -->
-
-{% block content %}
-{% include 'navbar.html' %}
-<!-- <button class="btn-primary bg-primary" onclick="submitScanConfiguration()">Test</button> -->
-
+</script>
 <div class="flex flex-col w-full h-full grow">
     {% include 'scan/scan_content.html' %}
     <footer class="text-xs opacity-50 text-center mt-16 py-4">© OrionScan, LLC. 2019 - 2023. All Rights Reserved | <a

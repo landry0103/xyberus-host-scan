@@ -51,7 +51,7 @@
                                     <td>{{ scan.get_state_display }}</td>
                                     <td>{{ scan.created_at|date:"SHORT_DATE_FORMAT" }}</td>
                                     <td>
-                                        <button class="btn btn-outline-secondary btn-sm" title="Refresh">
+                                        <button class="btn btn-outline-secondary btn-sm" title="Refresh" onclick="refreshPage()">
                                             <i class="fa fa-refresh"></i>
                                         </button>
                                     </td>
@@ -77,6 +77,41 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
+                                                        <!-- Scan results section -->
+                                                        <tr>
+                                                            <td class="key">scan_results</td>
+                                                            <td>
+                                                                <table class="json-table" cellpadding="0" cellspacing="0">
+                                                                    <tbody>
+                                                                        {% for result in scan.results.all %}
+                                                                        <tr>
+                                                                            {% if result.port %}
+                                                                                <td class="key">Port</td>
+                                                                                <td><div>{{ result.port }}</div></td>
+                                                                                <td class="key">State</td>
+                                                                                <td><div>{{ result.state }}</div></td>
+                                                                            {% else %}
+                                                                                <td class="key">State</td>
+                                                                                <td><div>{{ result.state }}</div></td>
+                                                                    
+                                                                                <td class="key">Alert</td>
+                                                                                <td><div>{{ result.alert }}</div></td>
+                                                                    
+                                                                                <td class="key">Description</td>
+                                                                                <td><div>{{ result.description }}</div></td>
+                                                                    
+                                                                                <td class="key">Risk</td>
+                                                                                <td><div>{{ result.risk }}</div></td>
+                                                                            {% endif %}
+                                                                        </tr>
+                                                                        {% empty %}
+                                                                        <tr><td><div>No results found.</div></td></tr>
+                                                                        {% endfor %}
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- End scan results section -->
                                                         <tr><td class="key">created_at</td><td><div>{{ scan.created_at|date:"Y-m-d H:i:s" }}</div></td></tr>
                                                         <tr><td class="key">updated_at</td><td><div>{{ scan.updated_at|date:"Y-m-d H:i:s" }}</div></td></tr>
                                                     </tbody>
@@ -85,6 +120,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                
                             {% endfor %}
                         </tbody>
                     </table>
@@ -204,21 +240,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="Sslyze TLS/SSL Security Scan" id="scanCheckBox6" onclick="updateScanChecks()">
-                                <div class="form-check-label d-flex justify-content-between" for="scanCheckBox6">
-                                    <div>
-                                        <div>Sslyze TLS/SSL Security Scan</div>
-                                        <div class="text-secondary">Analyze your TLS/SSL configuration for bad certificates, weak ciphers, Heartbleed, ROBOT and more.</div>
-                                    </div>
-                                    <div style="min-width: 120px;" class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary p-0 px-1">
-                                            Learn More
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="step1-footer float-end pt-4">
                                 <button type="button" id="nextButtonStep1" class="btn btn-primary bg-primary">Next</button>
                             </div>
@@ -591,6 +612,10 @@
             });
         });
     });
+
+    function refreshPage() {
+        location.reload();
+    }
 </script>
 
 <style>

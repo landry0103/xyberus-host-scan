@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
 from . import views
-from .views import scan_configuration
+from .views import scan_configuration, scan_test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,5 +19,6 @@ urlpatterns = [
     path("logout", views.google_logout, name="logout"),
 
     # Scan Configuration API
+    path('api/scan-test/', scan_test, name='scan_test'),
     path('api/scan-configuration/', scan_configuration, name='scan_configuration'),
 ]
